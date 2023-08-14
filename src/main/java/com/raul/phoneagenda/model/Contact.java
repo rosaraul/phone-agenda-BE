@@ -15,7 +15,6 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(unique = true)
     private String phoneNumber;
     @ManyToOne
     @JoinColumn(name = "user_id")
