@@ -1,9 +1,12 @@
 package com.raul.phoneagenda.service;
 
 
+import com.raul.phoneagenda.builder.ContactBuilder;
 import com.raul.phoneagenda.builder.UserBuilder;
+import com.raul.phoneagenda.dto.ContactDTO;
 import com.raul.phoneagenda.dto.UserDTO;
 import com.raul.phoneagenda.exception.CustomException;
+import com.raul.phoneagenda.model.Contact;
 import com.raul.phoneagenda.model.User;
 import com.raul.phoneagenda.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -55,5 +58,12 @@ public class UserService {
     public UserDTO createUser(UserDTO userDto){
         return UserBuilder.modelToDTO(userRepository.save(UserBuilder.dtoToModel(userDto)));
 
+    }
+    public UserDTO findUserByPhoneNumber(String phoneNumber) throws  CustomException{
+        Optional<User> userOptional = Optional.ofNullable(userRepository.findFirstByPhoneNumber(phoneNumber));
+        if(userOptional.isEmpty()){
+            throw new CustomException("User not found");
+        }
+        return UserBuilder.modelToDTO(userOptional.get());
     }
 }
