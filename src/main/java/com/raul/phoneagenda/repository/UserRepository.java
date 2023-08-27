@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findFirstById(Long id);
-    /*@Query(value = "SELECT * FROM utilizatori u WHERE u.name ILIKE '%' || :name || '%'", nativeQuery = true)*/
     List<User> findAllByName(String name);
     User findFirstByPhoneNumber(String phoneNumber);
     @Query(value = "SELECT * FROM utilizatori ",nativeQuery = true)
