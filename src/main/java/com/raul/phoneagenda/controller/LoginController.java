@@ -1,6 +1,7 @@
 package com.raul.phoneagenda.controller;
 
 import com.raul.phoneagenda.dto.CredentialsDTO;
+import com.raul.phoneagenda.dto.UserDTO;
 import com.raul.phoneagenda.exception.CustomException;
 import com.raul.phoneagenda.model.User;
 import com.raul.phoneagenda.service.LoginService;
@@ -21,7 +22,7 @@ public class LoginController {
     @PostMapping
     public ResponseEntity login(@RequestBody CredentialsDTO credentialsDto) {
         try {
-            User user = loginService.loginUser(credentialsDto);
+            UserDTO user = loginService.loginUser(credentialsDto);
             return ResponseEntity.status(HttpStatus.OK).body(user);
         } catch (CustomException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());

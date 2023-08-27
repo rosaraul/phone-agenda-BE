@@ -16,7 +16,7 @@ public class LoginService {
         this.userService = userService;
     }
 
-    public User loginUser(CredentialsDTO credentialsDto) throws CustomException {
+    public UserDTO loginUser(CredentialsDTO credentialsDto) throws CustomException {
 
         UserDTO userDto = userService.findUserByPhoneNumber(credentialsDto.getPhoneNumber());
         if(userDto == null){
@@ -26,6 +26,6 @@ public class LoginService {
             throw new CustomException("Bad credentials");
 
         }
-        return UserBuilder.dtoToModel(userDto);
+        return userDto;
     }
 }

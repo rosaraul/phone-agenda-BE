@@ -45,10 +45,16 @@ public class ContactService {
         Optional<Contact> contact = contactRepository.findById(contactId);
         Contact contactToUpdate = contact.orElseThrow(() -> new EntityNotFoundException(String.format("Contact with the ID %s not found", contact)));
         try {
-            contactToUpdate.setName(contactDTO.getName());
-            contactToUpdate.setPhoneNumber(contactDTO.getPhoneNumber());
+            if (contactDTO.getName() != null) {
+                contactToUpdate.setName(contactDTO.getName());
+            }
+
+            if (contactDTO.getPhoneNumber() != null) {
+                contactToUpdate.setPhoneNumber(contactDTO.getPhoneNumber());
+            }
+
             contactRepository.save(contactToUpdate);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             return false;
         }
         return true;
